@@ -1,10 +1,19 @@
 mas vesna {
 
-    agent alice:alice.asl {
+    // agent alice:alice.asl {
+    //    ag-class:   vesna.VesnaAgent
+    //    temper:     temper( prop1(0.2), prop2(0.3), prop3(-0.5)[mood], prop4(0.3)[mood] )
+    //    address:    localhost
+    //    port:       9080
+    //    strategy:   most_similar
+    //    goals:      start
+    //}
+
+    agent humanresources:humanresources.asl {
         ag-class:   vesna.VesnaAgent
-        temper:     temper( prop1(0.2), prop2(0.3), prop3(-0.5)[mood], prop4(0.3)[mood] )
+        temper:     temper( prop1(0.0), prop2(0.3), prop3(0.7)[mood], prop4(-0.05)[mood] )
         address:    localhost
-        port:       9080
+        port:       9081
         strategy:   most_similar
         goals:      start
     }
