@@ -52,3 +52,10 @@
         .wait( 5000 );
         .print( "Break is over, back to work!" );
         !go_to_work.
+
+@talk_with_p1[temper( [ prop1( 0.0 ), prop2( 0.3 ) ] ), effects( [ prop3( 0.7 ), prop4( -0.05 ) ] ) ]
++!talk_with( Person )
+    :   .my_name( Me ) & MyDesk( MyDesk ) & at( Me, MyDesk ) & get_location( Person, MyDesk )
+    <-  .print( "I am talking with ", Person, " at my desk." );
+        .wait( 5000 );
+        .print( "We finished talking." ).
