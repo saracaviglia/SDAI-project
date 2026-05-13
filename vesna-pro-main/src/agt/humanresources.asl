@@ -1,4 +1,5 @@
 { include( "vesna.asl" ) }
+{ include( "worker.asl" ) }
 
 +!start
     <- +my_region( reception );
@@ -13,13 +14,13 @@
     <-  !go_to( MyDesk );
         .print( "I am at my desk" ).
 
-@work_p1[temper( [ prop1( 0.0 ), prop2( 0.3 ) ] ), effects( [ prop3( 0.7 ), prop4( -0.05 ) ] ) ]
+@work_focus[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focus( 0.7 ), availability( -0.05 ) ] ) ]
 +!work_p
     :   .my_name( Me ) & my_desk( MyDesk ) & at( Me, MyDesk )
     <-  .print( "I am working a lot because I'm focused." );
         .wait( 10000 ).
 
-@work_p2[temper( [ prop3( 0.2 ), prop2( 0.3 ) ] ), effects( [ prop3( -0.1 ), prop4( 0.2 ) ] ) ]
+@work_distracted[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focus( -0.1 ), availability( 0.2 ) ] ) ]
 +!work_p
     :   .my_name( Me ) & my_desk( MyDesk ) & at( Me, MyDesk )
     <-  .print( "I am working a little because I'm distracted." );
@@ -32,7 +33,7 @@
         !go_to_work;
         !work_p.
 
-@take_break_p1[temper( [ prop1( 0.0 ), prop2( 0.3 ) ] ), effects( [ prop3( 0.7 ), prop4( -0.05 ) ] ) ]
+@take_break_focused[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focus( 0.7 ), availability( -0.05 ) ] ) ]
 +!take_break_p
     :   true
     <-  .print( "I am taking a break because I worked a lot." );
@@ -43,7 +44,7 @@
         .print( "Break is over, back to work!" );
         !go_to_work.
 
-@take_break_p2[temper( [ prop3( 0.2 ), prop2( 0.3 ) ] ), effects( [ prop3( -0.1 ), prop4( 0.2 ) ] ) ]
+@take_break_distracted[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focus( 0.1 ), availability( 0.2 ) ] ) ]
 +!take_break_p
     :   true
     <-  .print( "I am taking a break because I worked a little." );
@@ -53,9 +54,12 @@
         .print( "Break is over, back to work!" );
         !go_to_work.
 
-@talk_with_p1[temper( [ prop1( 0.0 ), prop2( 0.3 ) ] ), effects( [ prop3( 0.7 ), prop4( -0.05 ) ] ) ]
-+!talk_with( Person )
-    :   .my_name( Me ) & MyDesk( MyDesk ) & at( Me, MyDesk ) & get_location( Person, MyDesk )
-    <-  .print( "I am talking with ", Person, " at my desk." );
-        .wait( 5000 );
-        .print( "We finished talking." ).
+@answer_available[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focus( -0.5 ), availability( -0.05 ) ] ) ]
++!answer_client ( Client, Question )
+    <-  .print( "Answering ", Client, "'s question: ", Question );
+        .wait( 2000 );
+        .print( "I answered ", Client, "'s question." ).
+
+@answer_not_available[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focus( -0.1 ), availability( 0.2 ) ] ) ]
++!answer_client ( Client, Question )
+    <-  .print( "I cannot answer ", Client, "'s question: ", Question, " because I am not available." ).

@@ -9,17 +9,29 @@
        .wait( 2000 );
        .print( Person, " is not available." ).
 
-@waiting1[temper( [ prop1( 0.5 ), prop2( 0.5 ) ] ), effects( [ prop3( -0.1 ), prop4( -0.1 ) ] ) ]
+@asking_understanding[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( 0.5 ), patience( 0.3 ) ] ) ]
++!ask_question( Worker, Question )
+    <- .print( "Asking ", Worker, " the question: ", Question );
+       .wait( 2000 );
+       .print( Worker, " answered the question." ).
+
+@asking_not_understanding[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( -0.3 ), patience( -0.1 ) ] ) ]
++!ask_question( Worker, Question )
+    <- .print( "Asking ", Worker, " the question: ", Question );
+       .wait( 2000 );
+       .print( "I asked ", Worker, " a question, but didn't receive an understandable answer." ).
+
+@waiting1[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( -0.1 ), patience( -0.1 ) ] ) ]
 +!waiting
     <- .wait( 5000 );
        .print( "I waited a proper amount of time." ).
 
-@waiting2[temper( [ prop1( 0.5 ), prop2( 0.5 ) ] ), effects( [ prop3( -0.1 ), prop4( -0.1 ) ] ) ]
+@waiting2[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( -0.1 ), patience( -0.2 ) ] ) ]
 +!waiting
     <- .wait( 10000 );
        .print( "I waited more than a proper amount of time." ).
 
-@waiting3[temper( [ prop1( 0.5 ), prop2( 0.5 ) ] ), effects( [ prop3( -0.1 ), prop4( -0.1 ) ] ) ]
+@waiting3[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( -0.1 ), patience( -0.5 ) ] ) ]
 +!waiting
     <- .wait( 100000 );
        .print( "I waited a very long time and I am getting impatient." ).
