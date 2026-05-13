@@ -60,3 +60,8 @@
         .wait( 4000 );
         .print( "Break is over, back to work!" );
         !go_to_work.
+
++at( Me, Location )
+    :   .my_name( Me )
+    <-  .print( "I arrived at ", Location, "." );
+        .broadcast( tell, arrived_at( Me, Location ) ).

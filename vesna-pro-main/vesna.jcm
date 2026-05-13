@@ -11,11 +11,12 @@ mas vesna {
 
     agent humanresources:humanresources.asl {
         ag-class:   vesna.VesnaAgent
-        temper:     temper( hardworking(0.5), social(0.3), focus(0.7)[mood], availability(0.9)[mood] )
+        temper:     temper( hardworking(0.5), social(0.3), focusness(0.7)[mood], availability(0.9)[mood] )
         address:    localhost
         port:       9081
         strategy:   most_similar
         goals:      start
+        beliefs:    my_desk( junior_10_desk )
     }
 
     agent client1:client.asl {
@@ -25,14 +26,6 @@ mas vesna {
         port:       9082
         strategy:   most_similar
         goals:      start
-    }
-
-    workspace wp {
-        artifact coffee_machine: vesna.playgrounds.office.CoffeeMachine("common", 1)
-        artifact cup1: vesna.playgrounds.office.Cup("common")
-        artifact cup2: vesna.playgrounds.office.Cup("common")
-        artifact cup3: vesna.playgrounds.office.Cup("common")
-        artifact white_pages: kqml_s.WhitePages
     }
 
 }
