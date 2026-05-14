@@ -1,5 +1,4 @@
 { include( "vesna.asl" ) }
-{ include( "worker.asl" ) }
 
 +!start
     <- .wait( 5000 );
@@ -7,7 +6,7 @@
         !waiting;
         .wait( arrived_at( humanresources, junior_10_desk ), 10000, Res );
         .print( "Result of waiting: ", Res );
-        vesna.walk( junior_10_desk_front );
+        !walk( junior_10_desk_front );
         .wait( arrived_at( Me, junior_10_desk_front ), 10000, Res2 );
         !ask_question( humanresources, "What is the policy on remote work?" );
         !waiting.
