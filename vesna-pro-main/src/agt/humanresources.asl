@@ -19,13 +19,34 @@
 +!work_p
     :   .my_name( Me ) & my_desk( MyDesk ) & at( Me, MyDesk )
     <-  .print( "I am working a lot because I'm focused." );
-        .wait( 10000 ).
+        .wait( 100000 ).
 
 @work_distracted[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focusness( -0.1 ), availability( 0.2 ) ] ) ]
 +!work_p
     :   .my_name( Me ) & my_desk( MyDesk ) & at( Me, MyDesk )
     <-  .print( "I am working a little because I'm distracted." );
-        .wait( 5000 ).
+        .wait( 50000 ).
+
++!take_coffee( Cup )
+    :   .my_name( Me ) & not at( coffee_machine ) & not ntpp( Me, common )
+    <-  .print( "Going to take a coffee" );
+        !go_to( coffee_machine );
+        !take_coffee( Cup ).
+
++!take_coffee( Cup )
+    :   not grab( Cup )
+    <-  !grab( Cup );
+        !take_coffee( Cup ).
+
++!take_coffee( Cup )
+    :   grab( Cup )
+    <-  !use( coffee_machine );
+        make_coffee( Cup );
+        .wait( { +status( coffee ) } );
+        take_cup;
+        !free( coffee_machine );
+        .wait( 4000 );
+        .print( "I drank a coffee!" ).
 
 @take_break_focused[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focusness( 0.7 ), availability( -0.05 ) ] ) ]
 +!take_break_p
@@ -47,7 +68,7 @@
     <-  .print( "I am taking a break because I worked a little." );
         -at( Me, MyDesk );
         !walk( outside );
-        .wait( 5000 );
+        .wait( 50000 );
         .print( "Break is over, back to work!" );
         !walk( MyDesk );
         .wait( at( Me, MyDesk ), 10000, _ );
@@ -57,7 +78,7 @@
 @answer_available[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focusness( -0.5 ), availability( -0.05 ) ] ) ]
 +!answer_client ( Client, Question )
     <-  .print( "Answering ", Client, "'s question: ", Question );
-        .wait( 2000 );
+        .wait( 20000 );
         .print( "I answered ", Client, "'s question." ).
 
 @answer_not_available[temper( [ hardworking( 0.5 ), social( 0.3 ) ] ), effects( [ focusness( -0.1 ), availability( 0.2 ) ] ) ]

@@ -69,7 +69,7 @@ path_shortest( S, T, Shortest ) :-
 
 +!grab( Object, Anchor )
 	:	my_region( Object ) | ( my_region( S ) & ntpp( Object, S ) )
-	<-	vesna.grab( Object, Anchor );
+	<-	!grab( Object );
 		.wait( { +object_lifted( Object, _ ) } ).
 
 -ntpp( Me, Region )

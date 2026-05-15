@@ -26,6 +26,7 @@ mas vesna {
         port:       9082
         strategy:   most_similar
         goals:      start
+        beliefs:    my_name( Me )
     }
 
 }
