@@ -64,8 +64,10 @@ path_shortest( S, T, Shortest ) :-
 	<-	.succeed_goal( walk( Region ) ).
 
 +!walk( T )
-	<-	vesna.walk( T );
-		.wait( { +movement( completed, destination_reached ) }).// | ntpp( Me, T ) ).
+	<-	.my_name( Me);
+        vesna.walk( T );
+		.wait( { +movement( completed, destination_reached ) }); // | ntpp( Me, T ) ).
+        +at( Me, T ).
 
 +!grab( Object, Anchor )
 	:	my_region( Object ) | ( my_region( S ) & ntpp( Object, S ) )
@@ -78,7 +80,7 @@ path_shortest( S, T, Shortest ) :-
 
 // ARTIFACT INTERACTIONS
 +!use( ArtName )
-    :   .my_name( Me ) & ntpp( Me, MyRegion )
+    :   .my_name( Me ) & my_region( MyRegion ) // & ntpp( Me, MyRegion )
     <-  lookupArtifact( ArtName, ArtId );
         focus( ArtId );
         use( MyRegion )[ artifact_id( ArtId ) ].
@@ -92,20 +94,23 @@ path_shortest( S, T, Shortest ) :-
         free[ artifact_id( ArtId ) ].
 
 +!grab( ArtName )
-    :   .my_name( Me ) & ntpp( Me, MyRegion )
-    <-  lookupArtifact( ArtName, ArtId );
-        grab( MyRegion )[ artifact_id( ArtId ) ].
+    :   .my_name( Me ) & my_region( MyRegion ) // & ntpp( Me, MyRegion )
+    <-  .print( "I am trying to grab ", ArtName, " in region ", MyRegion );
+        lookupArtifact( ArtName, ArtId );
+        grab( MyRegion )[ artifact_id( ArtId ) ];
+        +grab( ArtName ).
 
 -!grab( ArtName )
     <-  .print( "I cannot grab ", ArtName ).
 
 +!release( ArtName )
-    :   .my_name( Me ) & ntpp( Me, MyRegion )
+    :   .my_name( Me ) & my_region( MyRegion ) // & ntpp( Me, MyRegion )
     <-  lookupArtifact( ArtName, ArtId );
         release( MyRegion )[ artifact_id( ArtId ) ].
 
 -!release( ArtName )
-    <-  .print( "Cannot release ", ArtName ).
+    <-  .print( "Cannot release ", ArtName );
+    -grab( ArtName ).
 
 find_path( Start, Target, Path ) :- find_path_recursive( Start, Target, [ Start ], Path ).
 
