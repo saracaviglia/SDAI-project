@@ -11,7 +11,7 @@ mas vesna {
 
     agent humanresources:humanresources.asl {
         ag-class:   vesna.VesnaAgent
-        temper:     temper( hardworking(0.5), social(0.3), focusness(0.7)[mood], availability(0.9)[mood] )
+        temper:     temper( focused(0.5)[mood] )
         address:    localhost
         port:       9081
         strategy:   most_similar

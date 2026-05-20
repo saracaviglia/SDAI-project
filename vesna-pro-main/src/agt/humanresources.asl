@@ -2,6 +2,7 @@
 
 +!start
     <- +my_region( reception );
+        .wait( 3000 );
         !go_to_work.
 
 +!go_to_work
