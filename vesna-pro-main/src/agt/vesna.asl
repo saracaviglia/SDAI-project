@@ -67,6 +67,7 @@ path_shortest( S, T, Shortest ) :-
 	<-	.my_name( Me);
         vesna.walk( T );
 		.wait( { +movement( completed, destination_reached ) }); // | ntpp( Me, T ) ).
+        .abolish( at( Me, _ ) );
         +at( Me, T ).
 
 +!grab( Object, Anchor )
