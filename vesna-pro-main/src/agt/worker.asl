@@ -1,22 +1,30 @@
 { include ( "vesna.asl" ) }
 
 +!start
-    <- !go_to_work.
-
-+!go_to_work
-    :   my_desk( MyDesk )
-    <-  !walk( MyDesk );
+    <-  !walk( junior_10_desk );
+        !work;
+        !take_break;
+        !work;
+        !take_break;
+        !work;
+        !take_break;
         !work.
 
+@work_focused[temper( [focused(0.5)] ), effects( [focused(-0.3)] )]
 +!work
-    :   my_name( Me )
+    :   .my_name( Me )
     <-  .print( "Working hard." );
-        .wait( 5000 );
-        !take_break.
+        .wait( 5000 ).
+
+@work_distracted[temper( [focused(0.2)] ), effects( [focused(0.2)] )]
++!work
+    :   .my_name( Me )
+    <-  .print( "Hardly working." );
+        .wait( 2000 ).
 
 +!take_break
-    :   my_name( Me )
+    :   .my_name( Me )
     <-  .print( "Taking a break." );
         !walk( common );
         .wait( 5000 );
-        !go_to_work.
+        !walk( junior_10_desk ).
