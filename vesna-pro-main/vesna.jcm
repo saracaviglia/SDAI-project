@@ -9,7 +9,8 @@ mas vesna {
     //    goals:      start
     //}
 
-    agent humanresources:humanresources.asl {
+    // changed from humanresources to worker in order to try from scratch
+    agent worker:worker.asl {
         ag-class:   vesna.VesnaAgent
         temper:     temper( focused(0.5)[mood] )
         address:    localhost
