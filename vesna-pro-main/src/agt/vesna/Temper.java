@@ -1,19 +1,28 @@
 package vesna;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Queue;
+import static jason.asSyntax.ASSyntax.*;
+
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Random;
 import java.util.stream.Collectors;
 
-import static jason.asSyntax.ASSyntax.*;
-import jason.asSyntax.*;
-import jason.asSemantics.*;
-import jason.asSyntax.parser.ParseException;
 import jason.NoValueException;
+import jason.asSemantics.Intention;
+import jason.asSemantics.Option;
+import jason.asSemantics.Unifier;
+import jason.asSyntax.Atom;
+import jason.asSyntax.ListTerm;
+import jason.asSyntax.Literal;
+import jason.asSyntax.NumberTerm;
+import jason.asSyntax.Pred;
+import jason.asSyntax.Term;
+import jason.asSyntax.VarTerm;
+import jason.asSyntax.parser.ParseException;
 
 /** This class implements the temper of the agent
  * <p>
