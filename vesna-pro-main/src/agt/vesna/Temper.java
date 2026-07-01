@@ -160,6 +160,7 @@ public class Temper {
 			.map( OptionWrapper::new )
 			.collect( Collectors.toList() );
 		try {
+            System.out.println( "In selectOption, wrappedOptions: " + wrappedOptions ); // DEBUG
 			return select( wrappedOptions ).getOption();
 		} catch ( NoValueException e ) {
 			return null;
@@ -170,6 +171,7 @@ public class Temper {
     	List<IntentionWrapper> wrappedIntentions = new ArrayList<>( intentions ).stream()
      		.map( IntentionWrapper::new )
      		.collect( Collectors.toList() );
+        System.out.println( "In selectIntention, wrappedIntentions: " + wrappedIntentions ); // DEBUG
        try {
         	Intention selected = select( wrappedIntentions ).getIntention();
          	Iterator<Intention> it = intentions.iterator();
@@ -180,8 +182,11 @@ public class Temper {
 	           }
            }
            Literal effectList = selected.peek().getPlan().getLabel().getAnnot( "effects" );
-           if ( effectList != null )
+           System.out.println( "Effects: " + effectList ); // DEBUG
+           if ( effectList != null ) {
                updateDynTemper( effectList );
+               System.out.println( "Mood updated: " + mood ); // DEBUG
+           }
            return selected;
        } catch ( NoValueException e ) {
 	       return null;
@@ -208,8 +213,6 @@ public class Temper {
         	chosenIdx = 0;
             chosen = choices.get( chosenIdx );
         }
-
-
         return chosen;
     }
 
@@ -247,6 +250,7 @@ public class Temper {
 
     private void updateDynTemper( Literal effectList ) throws NoValueException {
         ListTerm effects = ( ListTerm ) effectList.getTerm( 0 );
+        System.out.println( "In updateDynTemper" ); // DEBUG
         for ( Term effectTerm : effects ) {
             Literal effect = ( Literal ) effectTerm;
             if ( personality.keySet().contains( effect.getFunctor().toString() ) && !effect.hasAnnot( createLiteral( "mood" ) ) )
@@ -262,8 +266,9 @@ public class Temper {
                     mood.put( effect.getFunctor().toString(), 1.0 );
                 else if ( moodValue + effectValue < -1.0 )
                     mood.put( effect.getFunctor().toString(), 0.0 );
-                else
+                else 
                     mood.put( effect.getFunctor().toString(), moodValue + effectValue );
+                System.out.println( "Mood trait: " + effect.getFunctor().toString() + ", Mood value: " + moodValue + ", Effect value: " + effectValue + ", New mood value: " + mood.get( effect.getFunctor().toString() ) ); // DEBUG
             } catch ( NoValueException nve ) {
                 throw new NoValueException( "One of the plans has a mispelled annotation" );
             }

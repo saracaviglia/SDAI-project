@@ -10,7 +10,7 @@
         !take_break;
         !work.
 
-@work_focused[temper( [focused(0.5)] ), effects( [focused(-0.3)] )]
+@work_focused[temper( [focused(0.5)] ), effects( [focused(-0.2)] )]
 +!work
     :   .my_name( Me )
     <-  .print( "Working hard." );
