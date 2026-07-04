@@ -4,13 +4,11 @@
     <- .wait( 5000 );
         .print( "I am starting to wait." );
         !waiting;
-        // .wait( arrived_at( humanresources, junior_10_desk ), 10000, Res );
-        // .print( "Result of waiting: ", Res );
         !walk( junior_10_desk_front );
-        // .wait( arrived_at( Me, junior_10_desk_front ), 10000, Res2 );
-        !ask_question( humanresources, "What is the policy on remote work?" );
+        !ask_question( worker, "Where can I find the document I need?" );
         !waiting.
 
+// to fix
 @asking_understanding[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( 0.5 ), patience( 0.3 ) ] ) ]
 +!ask_question( Worker, Question )
     : near( self, Worker )
@@ -19,6 +17,7 @@
         .wait( 3000 );
         .print( Worker, " answered the question." ).
 
+// to fix
 @asking_not_understanding[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( -0.3 ), patience( -0.1 ) ] ) ]
 +!ask_question( Worker, Question )
     : near( self, Worker )
@@ -27,6 +26,7 @@
         .wait( 3000 );
         .print( "I asked ", Worker, " a question, but didn't receive an understandable answer." ).
 
+// to fix
 @asking_far[temper( [ curiosity( 0.6 ), social( 0.4 ) ] ), effects( [ understanding( -0.1 ), patience( -0.2 ) ] ) ]
 +!ask_question( Worker, Question )
     : not near( self, Worker )
