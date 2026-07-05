@@ -1,15 +1,5 @@
 mas vesna {
 
-    // agent alice:alice.asl {
-    //    ag-class:   vesna.VesnaAgent
-    //    temper:     temper( prop1(0.2), prop2(0.3), prop3(-0.5)[mood], prop4(0.3)[mood] )
-    //    address:    localhost
-    //    port:       9080
-    //    strategy:   most_similar
-    //    goals:      start
-    //}
-
-    // changed from humanresources to worker in order to try from scratch
     agent worker:worker.asl {
         ag-class:   vesna.VesnaAgent
         temper:     temper( focused(0.5)[mood] )
@@ -27,7 +17,33 @@ mas vesna {
         port:       9082
         strategy:   most_similar
         goals:      start
-        // beliefs:    my_name( Me )
+    }
+
+    agent client2:client.asl {
+        ag-class:   vesna.VesnaAgent
+        temper:     temper( curiosity(0.6), social(0.4), understanding(0.5)[mood], patience(0.8)[mood] )
+        address:    localhost
+        port:       9083
+        strategy:   most_similar
+        goals:      start
+    }
+
+    agent humanresources:humanresources.asl {
+        ag-class:   vesna.VesnaAgent
+        temper:     temper( focused(0.5)[mood] )
+        address:    localhost
+        port:       9084
+        strategy:   most_similar
+        goals:      start
+    }
+
+    agent director:director.asl {
+        ag-class:   vesna.VesnaAgent
+        temper:     temper( focused(0.5)[mood] )
+        address:    localhost
+        port:       9085
+        strategy:   most_similar
+        goals:      start
     }
 
 }

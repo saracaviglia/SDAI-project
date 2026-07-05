@@ -48,3 +48,15 @@
 +!waiting
     <- .wait( 100000 );
         .print( "I waited a very long time and I am getting impatient." ).
+
++!complain( Worker, Complaint )
+    :   .my_name( Me ) & near( self, HumanResources )
+    <-  .print( "Complaining to ", Worker, " about ", Complaint );
+        .wait( 3000 );
+        .print( "Complained to ", Worker, " about ", Complaint ).
+
++!complain( HumanResources, Complaint )
+    :   .my_name( Me ) & near( self, Director )
+    <-  .print( "Complaining to ", HumanResources, " about ", Complaint );
+        .wait( 3000 );
+        .print( "Complained to ", HumanResources, " about ", Complaint ).
