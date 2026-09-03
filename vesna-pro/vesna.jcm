@@ -1,0 +1,51 @@
+mas vesna {
+
+    agent worker1:worker.asl {
+        ag-class:   vesna.VesnaAgent
+        address:    localhost
+        port:       9081
+        goals:      start
+        beliefs:    my_desk( boss_1_desk )
+    }
+
+    agent worker2:worker.asl {
+        ag-class:   vesna.VesnaAgent
+        address:    localhost
+        port:       9086
+        goals:      start
+        beliefs:    my_desk( boss_3_desk )
+    }
+
+    agent client1:client1.asl {
+        ag-class:   vesna.VesnaAgent
+        address:    localhost
+        port:       9082
+        goals:      start
+        beliefs:    my_desk( junior_12_desk )
+    }
+
+    agent client2:client2.asl {
+        ag-class:   vesna.VesnaAgent
+        address:    localhost
+        port:       9083
+        goals:      start
+        beliefs:    my_desk( junior_10_desk )
+    }
+
+    agent humanresources:humanresources.asl {
+        ag-class:   vesna.VesnaAgent
+        address:    localhost
+        port:       9084
+        goals:      start
+        beliefs:    my_desk( senior_3_desk )
+    }
+
+    agent director:director.asl {
+        ag-class:   vesna.VesnaAgent
+        address:    localhost
+        port:       9085
+        goals:      start
+        beliefs:    my_desk( boss_2_desk )
+    }
+
+}

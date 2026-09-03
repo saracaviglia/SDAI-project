@@ -1,0 +1,67 @@
+defaultTasks 'run'
+
+apply plugin: 'java'
+
+repositories {
+    maven { url "https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master" }
+    maven { url "https://repo.gradle.org/gradle/libs-releases" }
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ["--enable-preview"]
+    // sourceCompatibility = "25"
+    // targetCompatibility = "25"
+}
+
+tasks.withType(Test) {
+    jvmArgs += ["--enable-preview"]
+}
+
+// application {
+//     applicationDefaultJvmArgs = ["--enable-preview"]
+// }
+
+dependencies {
+    implementation ('org.jacamo:jacamo:1.2')
+    // implementation 'io.github.jason-lang:jason-interpreter:3.3.2'
+
+    // https://mvnrepository.com/artifact/org.java-websocket/Java-WebSocket
+    implementation group: 'org.java-websocket', name: 'Java-WebSocket', version: '1.5.6'
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation("org.json:json:20230227")
+    implementation 'org.yaml:snakeyaml:2.6'
+    // https://mvnrepository.com/artifact/org.jgrapht/jgrapht-core
+    // implementation("org.jgrapht:jgrapht-core:1.5.2")
+
+}
+
+task run (type: JavaExec, dependsOn: 'classes') {
+    description 'runs the application'
+    group ' JaCaMo'
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args 'vesna.jcm'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+javadoc {
+    destinationDir = file( "$buildDir/docs/javadoc" )
+    options.memberLevel = JavadocMemberLevel.PRIVATE
+    options.addBooleanOption("-enable-preview", true)
+    options.addStringOption( "-add-stylesheet", "doc_style.css" )
+    options.author = true
+    options.version = true
+    options.source = "26"
+    options.links = ["https://jason-lang.github.io/api/"]
+    options.windowTitle = "VEsNA API"
+    options.docTitle = "VEsNA API"
+    options.header = "VEsNA API"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/'
+        }
+    }
+}
