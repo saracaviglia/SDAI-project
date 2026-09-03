@@ -6,8 +6,9 @@ The project will focus on a library/office scenario, with some clients that are 
 Since the basic MAS implementation of the project in Jason would be "banal", I will do it with VEsNA-ProC, which already provides a graphic user interface, along with some features (like character propenties).
 After this proposal, I modified some specifics: the main one is that I should have used VEsNA-Pro, instead of VEsNA-ProC. The difference is that VEsNA-ProC implements also cooperation, which was not needed in my scenario. However, some problems with the software resulted in the impossibility of using propensities: in the final version of my project I simply used VEsNA.
 
-### Structure of the repository
+VEsNA is a tool available at [VEsNA-ToolKit](https://github.com/VEsNA-ToolKit).
 
+### Structure of the repository
 Folders
 - `src\agt`: code for the agents (`.asl`)
 - `vesna`: all the VEsNA files in Java
